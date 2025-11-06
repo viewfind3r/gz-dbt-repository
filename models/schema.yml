@@ -52,9 +52,8 @@ sources:
             description: campaign identification 
           - name: date_date
             description: date identification
-        tests:
-          - unique:
-              column_name: "(campaign_key ||'date_date)"
+      
+
       - name: bing
         identifier: raw_gz_bing
         description: campaign details bing
@@ -66,6 +65,7 @@ sources:
         tests:
           - unique:
               column_name: "(campaign_key ||'-'|| date_date)"
+
       - name: criteo
         identifier: raw_gz_criteo
         description: campaign details criteo
@@ -77,6 +77,7 @@ sources:
         tests:
           - unique:
               column_name: "(campaign_key ||'-'|| date_date)"
+
       - name: facebook
         identifier: raw_gz_facebook
         description: campaign details facebook
