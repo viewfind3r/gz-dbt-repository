@@ -1,0 +1,46 @@
+version: 2
+
+sources:
+  - name: raw
+    database: curious-mender-475710-a7
+    schema: gz_raw_data
+
+    tables:
+      - name: sales
+        identifier: raw_gz_sales
+        description: sales of Greenweez / we have on row per product_id found in each orders_id
+        loaded_at_field: "CAST (date_date AS TIMESTAMP)"
+        freshness: 
+          warn_after:
+            count: 90
+            period: day
+        columns:
+          - name: orders_id
+            description: order identification 
+          - name: pdt_id
+            description: product identification
+        tests:
+          - unique:
+              column_name: "(orders_id ||'-'|| pdt_id)"
+        
+      - name: product
+        identifier: raw_gz_product
+        description: products and its pricing of Greenweez
+        columns:
+          - name: products_id
+            description: product identification
+            tests:
+              - unique
+              - not_null
+          
+
+      - name: ship
+        identifier: raw_gz_ship
+        description: shipping cost of orders on Greenweez
+        columns:
+          - name: orders_id
+            description: order identification
+            tests:
+              - unique
+              - not_null
+          
