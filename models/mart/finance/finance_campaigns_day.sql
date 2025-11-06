@@ -1,6 +1,7 @@
 SELECT
     date_date AS date,
     operational_margin-ads_cost AS ads_margin,
+    average_basket,
     operational_margin,
     ads_cost,
     impression AS ads_impression,
